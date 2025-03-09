@@ -1,0 +1,3 @@
+Hello all...
+
+Download the entire package, put it in a folder, and run the battleSim.py file.
