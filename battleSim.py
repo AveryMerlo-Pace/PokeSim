@@ -17,7 +17,7 @@ pokemon_list = [
     }),
     Pokemon("Venusaur", ["Grass", "Poison"], 140, 87, 88, 85, {
         "Vine Whip": {"power": 45, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
-        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Crunch": {"power": 80, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
         "Razor Leaf": {"power": 55, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
         "Sludge Bomb": {"power": 90, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
     }),
@@ -29,16 +29,42 @@ pokemon_list = [
     }),
     Pokemon("Charmeleon", ["Fire"], 118, 69, 63, 85, {
         "Ember": {"power": 40, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
-        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
-        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
-        "Flamethrower": {"power": 90, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]}
+        "Metal Claw": {"power": 50, "type": "Steel", "stab": 1.5, "super_effective": ["Rock", "Ice", "Fairy"], "not_very_effective": ["Fire", "Water", "Electric", "Steel"]},
+        "Flamethrower": {"power": 90, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
+        "Fire Spin": {"power": 35, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]}
     }),
-    Pokemon("Charizard", ["Fire", "Flying"], 138, 89, 83, 105),
-    Pokemon("Squirtle", ["Water"], 104, 53, 70, 48),
-    Pokemon("Wartortle", ["Water"], 119, 68, 85, 63),
-    Pokemon("Blastoise", ["Water"], 139, 88, 105, 83),
-    Pokemon("Caterpie", ["Bug"], 105, 35, 40, 50),
-    Pokemon("Metapod", ["Bug"], 110, 25, 60, 35),
+    Pokemon("Charizard", ["Fire", "Flying"], 138, 89, 83, 105, {
+        "Flamethrower": {"power": 90, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
+        "Air Slash": {"power": 75, "type": "Flying", "stab": 1.5, "super_effective": ["Bug", "Fighting", "Grass"], "not_very_effective": ["Dragon", "Steel", "Rock"]},
+        "Metal Wing": {"power": 50, "type": "Steel", "stab": 1, "super_effective": ["Rock", "Ice", "Fairy"], "not_very_effective": ["Fire", "Water", "Electric", "Steel"]},
+        "Dragon Claw": {"power": 80, "type": "Dragon", "stab": 1.5, "super_effective": ["Dragon"], "not_very_effective": []}
+    }),
+    Pokemon("Squirtle", ["Water"], 104, 53, 70, 48, {
+        "Water Gun": {"power": 40, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Dragon"]},
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Rapid Spin": {"power": 50, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Wartortle", ["Water"], 119, 68, 85, 63, {
+        "Surf": {"power": 70, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Dragon"]},
+        "Swift": {"power": 50, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Rapid Spin": {"power": 50, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Blastoise", ["Water"], 139, 88, 105, 83, {
+        "Hydro Pump": {"power": 110, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Dragon"]},
+        "Ice Beam": {"power": 90, "type": "Ice", "stab": 1, "super_effective": ["Dragon", "Flying", "Grass", "Ground"], "not_very_effective": ["Ice", "Water"]},
+        "Crunch": {"power": 80, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Rapid Spin": {"power": 50, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Caterpie", ["Bug"], 105, 35, 40, 50, {
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "String Shot": {"power": 10, "type": "Bug", "stab": 1, "super_effective": [], "not_very_effective": []},
+    }),
+    Pokemon("Metapod", ["Bug"], 110, 25, 60, 35, {
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Harden": {"power": 0, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+    }),
     Pokemon("Butterfree", ["Bug", "Flying"], 120, 50, 55, 80),
     Pokemon("Weedle", ["Bug", "Poison"], 100, 35, 30, 50),
     Pokemon("Kakuna", ["Bug", "Poison"], 105, 25, 50, 35),
@@ -80,7 +106,7 @@ pokemon_list = [
 ]
 
 # CREATE AND DESCRIBE USER PORKEMON
-your_random_pokemon = pokemon_list[2] # random.randint(0, len(pokemon_list)-1)
+your_random_pokemon = pokemon_list[random.randint(0, 10)] # random.randint(0, len(pokemon_list)-1)
 print(f"Your {your_random_pokemon.describePokemon()[0]}")
 #time.sleep(1)
 for i in range(1, len(your_random_pokemon.describePokemon())):
@@ -91,9 +117,9 @@ print("")
 time.sleep(3)
 
 # CREATE AND DESCRIBE AI POKEMON
-ai_random_pokemon = pokemon_list[3]#random.randint(0, len(pokemon_list)-1)]
+ai_random_pokemon = pokemon_list[random.randint(0, 10)] # random.randint(0, len(pokemon_list)-1)
 while your_random_pokemon == ai_random_pokemon:
-    ai_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
+    ai_random_pokemon = pokemon_list[random.randint(0, 10)] #random.randint(0, len(pokemon_list)-1)]
 print(f"The AI's {ai_random_pokemon.describePokemon()[0]}")
 #time.sleep(1)
 for i in range(1, len(ai_random_pokemon.describePokemon())):
@@ -106,7 +132,7 @@ time.sleep(3)
 # DESCRIBE USER MOVESET
 print(f"USER {your_random_pokemon.describeMoveset()[0]}")
 #time.sleep(1)
-for i in range(1, 5):
+for i in range(1, len(your_random_pokemon.describeMoveset())):
     print(your_random_pokemon.describeMoveset()[i])
     #time.sleep(1)
 
@@ -116,7 +142,7 @@ time.sleep(3)
 # DESCRIBE AI MOVESET
 print(f"AI {ai_random_pokemon.describeMoveset()[0]}")
 #time.sleep(1)
-for i in range(1, 5):
+for i in range(1, len(ai_random_pokemon.describeMoveset())):
     print(ai_random_pokemon.describeMoveset()[i])
     #time.sleep(1)
 
