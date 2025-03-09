@@ -102,18 +102,22 @@ def main():
         ai_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
     intro(your_random_pokemon, ai_random_pokemon)
     os.system('clear')
-    # WHO ATTACKS FIRST
-    print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
+    
     # ATTACK UNTIL ONE HP IS <=0
-    attackFirst = "USER" if your_random_pokemon.spd > ai_random_pokemon.spd else "AI"
     your_health = your_random_pokemon.hp
     ai_health = ai_random_pokemon.hp
+    move = 0
     while your_health > 0 and ai_health > 0:
 
+        print(f"TURN {move + 1}:")
+        if move == 0:
+            print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
+            attackFirst = "USER" if your_random_pokemon.spd > ai_random_pokemon.spd else "AI"
+        
         if attackFirst == "USER":
             damage = userMove(your_random_pokemon, ai_random_pokemon)
             ai_health = ai_random_pokemon.takeDamage(ai_health, damage) if ai_random_pokemon.takeDamage(ai_health, damage) > 0 else 0
-            print(f"{ai_random_pokemon.name.upper()} has {ai_health} HP left.\n")
+            print(f"{ai_random_pokemon.name.upper()} has {ai_health} / {ai_random_pokemon.hp} HP left.\n")
             time.sleep(5)
             
             if ai_health == 0:
@@ -125,9 +129,9 @@ def main():
             
             time.sleep(3)
 
-            damage = aiMove(ai_random_pokemon, your_random_pokemon)
+            damage = aiMove(ai_random_pokemon, your_random_pokemon) 
             your_health = your_random_pokemon.takeDamage(your_health, damage) if your_random_pokemon.takeDamage(your_health, damage) > 0 else 0
-            print(f"{your_random_pokemon.name.upper()} has {your_health} HP left.\n")
+            print(f"{your_random_pokemon.name.upper()} has {your_health} / {your_random_pokemon.hp} HP left.\n")
             time.sleep(5)
             
             if your_health == 0:
@@ -139,7 +143,7 @@ def main():
         else:
             damage = aiMove(ai_random_pokemon, your_random_pokemon)
             your_health = your_random_pokemon.takeDamage(your_health, damage) if your_random_pokemon.takeDamage(your_health, damage) > 0 else 0
-            print(f"{your_random_pokemon.name.upper()} has {your_health} HP left.\n")
+            print(f"{your_random_pokemon.name.upper()} has {your_health} / {your_random_pokemon.hp} HP left.\n")
             time.sleep(5)
             
             if your_health == 0:
@@ -153,7 +157,7 @@ def main():
             
             damage = userMove(your_random_pokemon, ai_random_pokemon)
             ai_health = ai_random_pokemon.takeDamage(ai_health, damage) if ai_random_pokemon.takeDamage(ai_health, damage) > 0 else 0
-            print(f"{ai_random_pokemon.name.upper()} has {ai_health} HP left.\n")
+            print(f"{ai_random_pokemon.name.upper()} has {ai_health} / {ai_random_pokemon.hp} HP left.\n")
             time.sleep(5)
             
             if ai_health == 0:
