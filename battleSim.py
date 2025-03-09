@@ -1,6 +1,7 @@
 from pokemon import Pokemon
 import time
 import random
+import os
 
 pokemon_list = [
     Pokemon("Bulbasaur", ["Grass", "Poison"], 105, 54, 54, 50, {
@@ -169,47 +170,241 @@ pokemon_list = [
         "Body Slam": {"power": 85, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
         "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]}
     }),
-    Pokemon("Nidoqueen", ["Poison", "Ground"], 150, 87, 92, 81),
-    Pokemon("Nidoran♂", ["Poison"], 106, 62, 45, 55),
-    Pokemon("Nidorino", ["Poison"], 121, 77, 62, 70),
-    Pokemon("Nidoking", ["Poison", "Ground"], 141, 97, 82, 90),
-    Pokemon("Clefairy", ["Fairy"], 130, 50, 53, 40),
-    Pokemon("Clefable", ["Fairy"], 155, 75, 78, 65),
-    Pokemon("Vulpix", ["Fire"], 98, 46, 45, 70),
-    Pokemon("Ninetales", ["Fire"], 133, 81, 80, 105),
-    Pokemon("Jigglypuff", ["Normal", "Fairy"], 180, 50, 28, 25),
-    Pokemon("Wigglytuff", ["Normal", "Fairy"], 205, 75, 53, 50),
-    Pokemon("Zubat", ["Poison", "Flying"], 95, 50, 40, 75),
-    Pokemon("Golbat", ["Poison", "Flying"], 120, 75, 65, 95),
-    Pokemon("Oddish", ["Grass", "Poison"], 110, 55, 60, 40),
-    Pokemon("Gloom", ["Grass", "Poison"], 125, 70, 75, 55),
-    Pokemon("Vileplume", ["Grass", "Poison"], 145, 90, 95, 75),
-    Pokemon("Paras", ["Bug", "Grass"], 100, 60, 55, 30),
-    Pokemon("Parasect", ["Bug", "Grass"], 125, 85, 80, 55),
-    Pokemon("Venonat", ["Bug", "Poison"], 115, 55, 55, 50),
-    Pokemon("Venomoth", ["Bug", "Poison"], 130, 70, 65, 95),
-    Pokemon("Diglett", ["Ground"], 80, 55, 25, 95),
-    Pokemon("Dugtrio", ["Ground"], 105, 80, 50, 120),
-    Pokemon("Meowth", ["Normal"], 90, 45, 35, 90),
-    Pokemon("Persian", ["Normal"], 115, 70, 60, 115),
-    Pokemon("Psyduck", ["Water"], 100, 52, 48, 55),
-    Pokemon("Golduck", ["Water"], 130, 82, 78, 85),
-    Pokemon("Mankey", ["Fighting"], 100, 80, 35, 70),
-    Pokemon("Primeape", ["Fighting"], 120, 105, 60, 95),
-    Pokemon("Growlithe", ["Fire"], 120, 70, 45, 60),
-    Pokemon("Arcanine", ["Fire"], 155, 110, 80, 95),
-    Pokemon("Poliwag", ["Water"], 100, 50, 40, 90),
-    Pokemon("Poliwhirl", ["Water"], 130, 65, 65, 70),
-    Pokemon("Poliwrath", ["Water", "Fighting"], 160, 85, 95, 70),
-    Pokemon("Abra", ["Psychic"], 90, 20, 15, 90),
-    Pokemon("Kadabra", ["Psychic"], 100, 35, 30, 105),
-    Pokemon("Alakazam", ["Psychic"], 120, 50, 45, 120),
-    Pokemon("Machop", ["Fighting"], 140, 80, 50, 35),
-    Pokemon("Machoke", ["Fighting"], 160, 100, 70, 45),
-    Pokemon("Machamp", ["Fighting"], 180, 130, 80, 55),
-    Pokemon("Bellsprout", ["Grass", "Poison"], 105, 75, 50, 40),
-    Pokemon("Weepinbell", ["Grass", "Poison"], 130, 90, 65, 55),
-    Pokemon("Victreebel", ["Grass", "Poison"], 155, 105, 80, 70),
+    Pokemon("Nidoqueen", ["Poison", "Ground"], 150, 87, 92, 81, {
+        "Earthquake": {"power": 100, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]},
+        "Poison Fang": {"power": 50, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Body Slam": {"power": 85, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Crunch": {"power": 80, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]}
+    }),
+    Pokemon("Nidoran♂", ["Poison"], 106, 62, 45, 55, {
+        "Peck": {"power": 35, "type": "Flying", "stab": 1, "super_effective": ["Grass", "Fighting", "Bug"], "not_very_effective": ["Electric", "Steel", "Rock"]},
+        "Poison Sting": {"power": 15, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Leer": {"power": 0, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Nidorino", ["Poison"], 121, 77, 62, 70, {
+        "Horn Attack": {"power": 65, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Poison Jab": {"power": 80, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Fury Attack": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Leer": {"power": 0, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Nidoking", ["Poison", "Ground"], 141, 97, 82, 90, {
+        "Earthquake": {"power": 100, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]},
+        "Poison Jab": {"power": 80, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Megahorn": {"power": 120, "type": "Bug", "stab": 1, "super_effective": ["Grass", "Psychic", "Dark"], "not_very_effective": ["Fire", "Fighting", "Poison", "Flying", "Ghost", "Steel", "Fairy"]},
+        "Thunderbolt": {"power": 90, "type": "Electric", "stab": 1, "super_effective": ["Water", "Flying"], "not_very_effective": ["Electric", "Grass", "Dragon"]}
+    }),
+    Pokemon("Clefairy", ["Fairy"], 130, 50, 53, 40, {
+        "Pound": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Disarming Voice": {"power": 40, "type": "Fairy", "stab": 1.5, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Sing": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Clefable", ["Fairy"], 155, 75, 78, 65, {
+        "Moonblast": {"power": 95, "type": "Fairy", "stab": 1.5, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Body Slam": {"power": 85, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Psychic": {"power": 90, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Metronome": {"power": 20, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Vulpix", ["Fire"], 98, 46, 45, 70, {
+        "Ember": {"power": 40, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
+        "Quick Attack": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Will-O-Wisp": {"power": 20, "type": "Fire", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Ninetales", ["Fire"], 133, 81, 80, 105, {
+        "Flamethrower": {"power": 90, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
+        "Quick Attack": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Will-O-Wisp": {"power": 20, "type": "Fire", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Extrasensory": {"power": 80, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Jigglypuff", ["Normal", "Fairy"], 180, 50, 28, 25, {
+        "Pound": {"power": 40, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Disarming Voice": {"power": 40, "type": "Fairy", "stab": 1.5, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Sing": {"power": 15, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": []},
+        "Defense Curl": {"power": 10, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Wigglytuff", ["Normal", "Fairy"], 205, 75, 53, 50, {
+        "Double-Edge": {"power": 120, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Play Rough": {"power": 90, "type": "Fairy", "stab": 1.5, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Hyper Voice": {"power": 90, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Disable": {"power": 10, "type": "Normal", "stab": 1.5, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Zubat", ["Poison", "Flying"], 95, 50, 40, 75, {
+        "Absorb": {"power": 20, "type": "Grass", "stab": 1, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Gust": {"power": 40, "type": "Flying", "stab": 1.5, "super_effective": ["Grass", "Fighting", "Bug"], "not_very_effective": ["Electric", "Steel", "Rock"]},
+        "Poison Fang": {"power": 50, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
+    Pokemon("Golbat", ["Poison", "Flying"], 120, 75, 65, 95, {
+        "Wing Attack": {"power": 60, "type": "Flying", "stab": 1.5, "super_effective": ["Grass", "Fighting", "Bug"], "not_very_effective": ["Electric", "Steel", "Rock"]},
+        "Poison Fang": {"power": 50, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Air Cutter": {"power": 60, "type": "Flying", "stab": 1.5, "super_effective": ["Grass", "Fighting", "Bug"], "not_very_effective": ["Electric", "Steel", "Rock"]},
+        "Confuse Ray": {"power": 10, "type": "Ghost", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Dark"]}
+    }),
+    Pokemon("Oddish", ["Grass", "Poison"], 110, 55, 60, 40, {
+        "Absorb": {"power": 20, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Poison Powder": {"power": 15, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Acid": {"power": 40, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
+    Pokemon("Gloom", ["Grass", "Poison"], 125, 70, 75, 55, {
+        "Mega Drain": {"power": 40, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Poison Powder": {"power": 15, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Acid": {"power": 40, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Lucky Chant": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Vileplume", ["Grass", "Poison"], 145, 90, 95, 75, {
+        "Petal Blizzard": {"power": 90, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Sludge Bomb": {"power": 90, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Moonblast": {"power": 95, "type": "Fairy", "stab": 1, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Sleep Powder": {"power": 15, "type": "Grass", "stab": 1.5, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Paras", ["Bug", "Grass"], 100, 60, 55, 30, {
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Absorb": {"power": 20, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Poison Powder": {"power": 15, "type": "Poison", "stab": 1, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Stun Spore": {"power": 15, "type": "Grass", "stab": 1.5, "super_effective": [], "not_very_effective": []}
+    }),
+   Pokemon("Parasect", ["Bug", "Grass"], 125, 85, 80, 55, {
+        "X-Scissor": {"power": 80, "type": "Bug", "stab": 1.5, "super_effective": ["Grass", "Psychic", "Dark"], "not_very_effective": ["Fire", "Fighting", "Poison", "Flying", "Ghost", "Steel", "Fairy"]},
+        "Giga Drain": {"power": 75, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Poison Jab": {"power": 80, "type": "Poison", "stab": 1, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Spore": {"power": 15, "type": "Grass", "stab": 1.5, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Venonat", ["Bug", "Poison"], 115, 55, 55, 50, {
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Confusion": {"power": 50, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Poison Powder": {"power": 15, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Psybeam": {"power": 65, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Venomoth", ["Bug", "Poison"], 130, 70, 65, 95, {
+        "Bug Buzz": {"power": 90, "type": "Bug", "stab": 1.5, "super_effective": ["Grass", "Psychic", "Dark"], "not_very_effective": ["Fire", "Fighting", "Poison", "Flying", "Ghost", "Steel", "Fairy"]},
+        "Psychic": {"power": 90, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Sludge Bomb": {"power": 90, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]},
+        "Sleep Powder": {"power": 15, "type": "Grass", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Diglett", ["Ground"], 80, 55, 25, 95, {
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Dig": {"power": 80, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]},
+        "Mud-Slap": {"power": 20, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]}
+    }),
+    Pokemon("Dugtrio", ["Ground"], 105, 80, 50, 120, {
+        "Earthquake": {"power": 100, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]},
+        "Slash": {"power": 70, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Dig": {"power": 80, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]},
+        "Sand Tomb": {"power": 35, "type": "Ground", "stab": 1.5, "super_effective": ["Fire", "Electric", "Poison", "Rock", "Steel"], "not_very_effective": ["Grass", "Bug"]}
+    }),
+    Pokemon("Meowth", ["Normal"], 90, 45, 35, 90, {
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Pay Day": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]}
+    }),
+    Pokemon("Persian", ["Normal"], 115, 70, 60, 115, {
+        "Slash": {"power": 70, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Play Rough": {"power": 90, "type": "Fairy", "stab": 1, "super_effective": ["Fighting", "Dark", "Dragon"], "not_very_effective": ["Fire", "Poison", "Steel"]},
+        "Fake Out": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Ghost", "Rock", "Steel"]}
+    }),
+    Pokemon("Psyduck", ["Water"], 100, 52, 48, 55, {
+        "Water Gun": {"power": 40, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Dragon", "Grass"]},
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Confusion": {"power": 50, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Disable": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Golduck", ["Water"], 130, 82, 78, 85, {
+        "Hydro Pump": {"power": 110, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Dragon", "Grass"]},
+        "Psychic": {"power": 90, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Zen Headbutt": {"power": 80, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Fury Swipes": {"power": 18, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]}
+    }),
+    Pokemon("Mankey", ["Fighting"], 100, 80, 35, 70, {
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Low Kick": {"power": 60, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Leer": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Fury Swipes": {"power": 18, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]}
+    }),
+    Pokemon("Primeape", ["Fighting"], 120, 105, 60, 95, {
+        "Close Combat": {"power": 120, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Cross Chop": {"power": 100, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Fury Swipes": {"power": 18, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Screech": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Growlithe", ["Fire"], 120, 70, 45, 60, {
+        "Ember": {"power": 40, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Water", "Rock", "Dragon"]},
+        "Bite": {"power": 60, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Leer": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Take Down": {"power": 90, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]}
+    }),
+    Pokemon("Arcanine", ["Fire"], 155, 110, 80, 95, {
+        "Flare Blitz": {"power": 120, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Water", "Rock", "Dragon"]},
+        "Crunch": {"power": 80, "type": "Dark", "stab": 1, "super_effective": ["Ghost", "Psychic"], "not_very_effective": ["Fairy", "Dark"]},
+        "Extreme Speed": {"power": 80, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Agility": {"power": 15, "type": "Psychic", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Poliwag", ["Water"], 100, 50, 40, 90, {
+        "Bubble": {"power": 40, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Grass", "Dragon"]},
+        "Pound": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Hypnosis": {"power": 15, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Poliwhirl", ["Water"], 130, 65, 65, 70, {
+        "Water Gun": {"power": 40, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Grass", "Dragon"]},
+        "Double Slap": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Hypnosis": {"power": 15, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Bubble Beam": {"power": 65, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Grass", "Dragon"]}
+    }),
+    Pokemon("Poliwrath", ["Water", "Fighting"], 160, 85, 95, 70, {
+        "Hydro Pump": {"power": 110, "type": "Water", "stab": 1.5, "super_effective": ["Fire", "Ground", "Rock"], "not_very_effective": ["Water", "Grass", "Dragon"]},
+        "Close Combat": {"power": 120, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Dynamic Punch": {"power": 100, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Hypnosis": {"power": 15, "type": "Psychic", "stab": 1, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Abra", ["Psychic"], 90, 20, 15, 90, {
+        "Teleport": {"power": 10, "type": "Psychic", "stab": 1.5, "super_effective": [], "not_very_effective": []},
+        "Confusion": {"power": 50, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Kadabra", ["Psychic"], 100, 35, 30, 105, {
+        "Confusion": {"power": 50, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Psybeam": {"power": 65, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Disable": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []}
+    }),
+    Pokemon("Alakazam", ["Psychic"], 120, 50, 45, 120, {
+        "Psychic": {"power": 90, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Psybeam": {"power": 65, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]},
+        "Recover": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Future Sight": {"power": 120, "type": "Psychic", "stab": 1.5, "super_effective": ["Poison", "Fighting"], "not_very_effective": ["Psychic", "Steel"]}
+    }),
+    Pokemon("Machop", ["Fighting"], 140, 80, 50, 35, {
+        "Low Kick": {"power": 60, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Leer": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Focus Energy": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Karate Chop": {"power": 50, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]}
+    }),
+    Pokemon("Machoke", ["Fighting"], 160, 100, 70, 45, {
+        "Low Sweep": {"power": 65, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Leer": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Focus Energy": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Seismic Toss": {"power": 100, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]}
+    }),
+    Pokemon("Machamp", ["Fighting"], 180, 130, 80, 55, {
+        "Close Combat": {"power": 120, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]},
+        "Leer": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Focus Energy": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Dynamic Punch": {"power": 100, "type": "Fighting", "stab": 1.5, "super_effective": ["Normal", "Rock", "Steel", "Ice", "Dark"], "not_very_effective": ["Poison", "Flying", "Psychic", "Bug", "Fairy"]}
+    }),
+    Pokemon("Bellsprout", ["Grass", "Poison"], 105, 75, 50, 40, {
+        "Vine Whip": {"power": 45, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Growth": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Wrap": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Poison Powder": {"power": 15, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
+    Pokemon("Weepinbell", ["Grass", "Poison"], 130, 90, 65, 55, {
+        "Vine Whip": {"power": 45, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Growth": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Wrap": {"power": 15, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Acid": {"power": 40, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
+    Pokemon("Victreebel", ["Grass", "Poison"], 155, 105, 80, 70, {
+        "Leaf Blade": {"power": 90, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Growth": {"power": 10, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": []},
+        "Slam": {"power": 80, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Sludge Bomb": {"power": 90, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
     Pokemon("Tentacool", ["Water", "Poison"], 100, 40, 35, 70),
     Pokemon("Tentacruel", ["Water", "Poison"], 150, 70, 65, 100),
     Pokemon("Geodude", ["Rock", "Ground"], 100, 80, 100, 20),
@@ -292,6 +487,8 @@ pokemon_list = [
     Pokemon("Mew", ["Psychic"], 175, 120, 120, 120)
 ]
 
+os.system('clear')
+
 # CREATE AND DESCRIBE USER PORKEMON
 your_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
 print(f"Your {your_random_pokemon.describePokemon()[0]}")
@@ -334,7 +531,9 @@ for i in range(1, len(ai_random_pokemon.describeMoveset())):
     #time.sleep(1)
 
 print("")
-time.sleep(3)
+time.sleep(5)
+
+os.system('clear')
 
 # WHO ATTACKS FIRST
 print(f"{ai_random_pokemon.name.upper()} (AI) ATTACKS FIRST ({ai_random_pokemon.spd} SPD > {your_random_pokemon.spd} SPD)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
