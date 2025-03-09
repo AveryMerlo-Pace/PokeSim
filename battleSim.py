@@ -103,36 +103,66 @@ def main():
     intro(your_random_pokemon, ai_random_pokemon)
     os.system('clear')
     # WHO ATTACKS FIRST
-    # print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
+    print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
     # ATTACK UNTIL ONE HP IS <=0
+    attackFirst = "USER" if your_random_pokemon.spd > ai_random_pokemon.spd else "AI"
     your_health = your_random_pokemon.hp
     ai_health = ai_random_pokemon.hp
     while your_health > 0 and ai_health > 0:
 
-        damage = userMove(your_random_pokemon, ai_random_pokemon)
-        ai_health = ai_random_pokemon.takeDamage(ai_health, damage) if ai_random_pokemon.takeDamage(ai_health, damage) > 0 else 0
-        print(f"{ai_random_pokemon.name.upper()} has {ai_health} HP left.\n")
-        
-        if ai_health == 0:
-            print(f"{ai_random_pokemon.name.upper()} has fainted!")
+        if attackFirst == "USER":
+            damage = userMove(your_random_pokemon, ai_random_pokemon)
+            ai_health = ai_random_pokemon.takeDamage(ai_health, damage) if ai_random_pokemon.takeDamage(ai_health, damage) > 0 else 0
+            print(f"{ai_random_pokemon.name.upper()} has {ai_health} HP left.\n")
+            time.sleep(5)
+            
+            if ai_health == 0:
+                print(f"{ai_random_pokemon.name.upper()} has fainted!")
+                time.sleep(3)
+                print("You win!\n")
+                time.sleep(3)
+                break
+            
             time.sleep(3)
-            print("You win!\n")
-            time.sleep(3)
-            break
-        
-        time.sleep(3)
 
-        damage = aiMove(ai_random_pokemon, your_random_pokemon)
-        your_health = your_random_pokemon.takeDamage(your_health, damage) if your_random_pokemon.takeDamage(your_health, damage) > 0 else 0
-        print(f"{your_random_pokemon.name.upper()} has {your_health} HP left.\n")
-        time.sleep(5)
-        
-        if your_health == 0:
-            print(f"{your_random_pokemon.name.upper()} has fainted!")
+            damage = aiMove(ai_random_pokemon, your_random_pokemon)
+            your_health = your_random_pokemon.takeDamage(your_health, damage) if your_random_pokemon.takeDamage(your_health, damage) > 0 else 0
+            print(f"{your_random_pokemon.name.upper()} has {your_health} HP left.\n")
+            time.sleep(5)
+            
+            if your_health == 0:
+                print(f"{your_random_pokemon.name.upper()} has fainted!")
+                time.sleep(3)
+                print("You lose!\n")
+                time.sleep(3)
+                break
+        else:
+            damage = aiMove(ai_random_pokemon, your_random_pokemon)
+            your_health = your_random_pokemon.takeDamage(your_health, damage) if your_random_pokemon.takeDamage(your_health, damage) > 0 else 0
+            print(f"{your_random_pokemon.name.upper()} has {your_health} HP left.\n")
+            time.sleep(5)
+            
+            if your_health == 0:
+                print(f"{your_random_pokemon.name.upper()} has fainted!")
+                time.sleep(3)
+                print("You lose!\n")
+                time.sleep(3)
+                break
+            
             time.sleep(3)
-            print("You lose!\n")
-            time.sleep(3)
-            break
+            
+            damage = userMove(your_random_pokemon, ai_random_pokemon)
+            ai_health = ai_random_pokemon.takeDamage(ai_health, damage) if ai_random_pokemon.takeDamage(ai_health, damage) > 0 else 0
+            print(f"{ai_random_pokemon.name.upper()} has {ai_health} HP left.\n")
+            time.sleep(5)
+            
+            if ai_health == 0:
+                print(f"{ai_random_pokemon.name.upper()} has fainted!")
+                time.sleep(3)
+                print("You win!\n")
+                time.sleep(3)
+                break
+            
         
         os.system('clear')
         
