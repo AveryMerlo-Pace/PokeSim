@@ -1,17 +1,18 @@
 import random
 import time
-#print("\n")
+print("")
 
 POKE_LEVEL = 50
 
 class Pokemon:
-    def __init__(self, name, poketype, hp, atk, defn, spd):
+    def __init__(self, name, poketype, hp, atk, defn, spd, moves=None):
         self.name = name
         self.poketype = poketype
         self.hp = hp
         self.atk = atk
         self.defn = defn
         self.spd = spd
+        self.moves = moves if moves else {}
     
     def describePokemon(self):
         pokeChar = [f"POKEMON is {self.name.upper()}!"]
@@ -25,14 +26,32 @@ class Pokemon:
         pokeChar.append(f"Speed: {self.spd}")
         return pokeChar
     
-    def pokemonAttack(self):
+    def describeMoveset(self):
+        moveSet = [f"{self.name.upper()}'s moves are:"]
+        count = 1
+        for i in self.moves.keys():
+            moveSet.append(f"{count}. {i} (POWER: {self.moves[i]["power"]}, TYPE: {self.moves[i]["type"]})")
+            count = count + 1
+        return moveSet
+    
+    def pokemonAttack(self, opp_pokemon):
         return ""
 
 pokemon_list = [
-    Pokemon("Bulbasaur", ["Grass", "Poison"], 105, 54, 54, 50),
+    Pokemon("Bulbasaur", ["Grass", "Poison"], 105, 54, 54, 50, {
+        "Vine Whip": {"power": 45, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Razor Leaf": {"power": 55, "type": "Grass", "stab": 1.5, "super_effective": ["Water", "Ground", "Rock"], "not_very_effective": ["Fire", "Grass", "Poison", "Flying", "Bug", "Dragon", "Steel"]},
+        "Sludge Bomb": {"power": 90, "type": "Poison", "stab": 1.5, "super_effective": ["Grass", "Fairy"], "not_very_effective": ["Poison", "Ground", "Rock", "Ghost"]}
+    }),
     Pokemon("Ivysaur", ["Grass", "Poison"], 120, 67, 68, 65),
     Pokemon("Venusaur", ["Grass", "Poison"], 140, 87, 88, 85),
-    Pokemon("Charmander", ["Fire"], 99, 57, 48, 70),
+    Pokemon("Charmander", ["Fire"], 99, 57, 48, 70, {
+        "Ember": {"power": 40, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]},
+        "Tackle": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Scratch": {"power": 40, "type": "Normal", "stab": 1, "super_effective": [], "not_very_effective": ["Rock", "Steel"]},
+        "Flamethrower": {"power": 90, "type": "Fire", "stab": 1.5, "super_effective": ["Bug", "Steel", "Grass", "Ice"], "not_very_effective": ["Fire", "Dragon", "Rock"]}
+    }),
     Pokemon("Charmeleon", ["Fire"], 118, 69, 63, 85),
     Pokemon("Charizard", ["Fire", "Flying"], 138, 89, 83, 105),
     Pokemon("Squirtle", ["Water"], 104, 53, 70, 48),
@@ -80,15 +99,16 @@ pokemon_list = [
     Pokemon("Venomoth", ["Bug", "Poison"], 130, 70, 65, 95)
 ]
 
-your_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
-print(f"\nYour {your_random_pokemon.describePokemon()[0]}")
+
+your_random_pokemon = pokemon_list[0] # random.randint(0, len(pokemon_list)-1)
+print(f"Your {your_random_pokemon.describePokemon()[0]}")
 #time.sleep(1)
 for i in range(1, len(your_random_pokemon.describePokemon())):
     print(f"{your_random_pokemon.describePokemon()[i]}")
     #time.sleep(1)
 print("")
-#time.sleep(3)
-ai_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
+time.sleep(3)
+ai_random_pokemon = pokemon_list[3]#random.randint(0, len(pokemon_list)-1)]
 while your_random_pokemon == ai_random_pokemon:
     ai_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
 print(f"The AI's {ai_random_pokemon.describePokemon()[0]}")
@@ -97,7 +117,21 @@ for i in range(1, len(ai_random_pokemon.describePokemon())):
     print(f"{ai_random_pokemon.describePokemon()[i]}")
     #time.sleep(1)
 print("")
-print(f"{ai_random_pokemon.name.upper()} (AI) ATTACKS FIRST ({ai_random_pokemon.spd} SPD > {your_random_pokemon.spd} SPD)" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)")
+time.sleep(3)
 
+print(f"USER {your_random_pokemon.describeMoveset()[0]}")
+time.sleep(1)
+for i in range(1, 5):
+    print(your_random_pokemon.describeMoveset()[i])
+    time.sleep(1)
+print("")
+time.sleep(3)
+print(f"AI {ai_random_pokemon.describeMoveset()[0]}")
+time.sleep(1)
+for i in range(1, 5):
+    print(ai_random_pokemon.describeMoveset()[i])
+    time.sleep(1)
+print("")
+print(f"{ai_random_pokemon.name.upper()} (AI) ATTACKS FIRST ({ai_random_pokemon.spd} SPD > {your_random_pokemon.spd} SPD)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
 
     
