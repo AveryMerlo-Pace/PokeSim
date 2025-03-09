@@ -42,16 +42,20 @@ class Pokemon:
         stab = self.moves[move]["stab"]
         if opp_type1 in self.moves[move]["not_very_effective"]:
             type1 = 0.5
+            print(f"{move} is not very effective against {opp_type1}...")
         elif opp_type1 in self.moves[move]["super_effective"]:
             type1 = 2
+            print(f"{move} is super effective against {opp_type1}!")
         else:
             type1 = 1
         type2 = 1
         if opp_type2 != None:
             if opp_type2 in self.moves[move]["not_very_effective"]:
                 type2 = 0.5
+                print(f"{move} is not very effective against {opp_type2}...")
             elif opp_type2 in self.moves[move]["super_effective"]:
                 type2 = 2
+                print(f"{move} is super effective against {opp_type2}!")
             else:
                 type2 = 1
         

@@ -882,7 +882,7 @@ pokemon_list = [
     })
 ]
 
-os.system('clear')
+# os.system('clear')
 
 # CREATE AND DESCRIBE USER PORKEMON
 your_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
@@ -893,7 +893,7 @@ for i in range(1, len(your_random_pokemon.describePokemon())):
     #time.sleep(1)
 
 print("")
-time.sleep(3)
+# time.sleep(3)
 
 # CREATE AND DESCRIBE AI POKEMON
 ai_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
@@ -906,9 +906,9 @@ for i in range(1, len(ai_random_pokemon.describePokemon())):
     #time.sleep(1)
 
 print("")
-time.sleep(3)
+# time.sleep(3)
 
-# DESCRIBE USER MOVESET
+# # DESCRIBE USER MOVESET
 print(f"USER {your_random_pokemon.describeMoveset()[0]}")
 #time.sleep(1)
 for i in range(1, len(your_random_pokemon.describeMoveset())):
@@ -916,7 +916,7 @@ for i in range(1, len(your_random_pokemon.describeMoveset())):
     #time.sleep(1)
 
 print("")
-time.sleep(3)
+# time.sleep(3)
 
 # DESCRIBE AI MOVESET
 print(f"AI {ai_random_pokemon.describeMoveset()[0]}")
@@ -926,9 +926,9 @@ for i in range(1, len(ai_random_pokemon.describeMoveset())):
     #time.sleep(1)
 
 print("")
-time.sleep(5)
+# time.sleep(5)
 
-os.system('clear')
+# os.system('clear')
 
 # WHO ATTACKS FIRST
 #print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
@@ -941,5 +941,13 @@ os.system('clear')
 #     your_random_pokemon.hp -= 1
 
 # WORKING DAMAGE LINE USING BULBASAUR'S TACKLE ON CHARMANDER
-damage = pokemon_list[0].pokemonAttack("Tackle", pokemon_list[3].defn, pokemon_list[3].poketype[0], pokemon_list[3].poketype[1] if len(pokemon_list[3].poketype) > 1 else None)
-print(f"{pokemon_list[0].name.upper()} did {damage} damage to {pokemon_list[3].name.upper()} with 'Tackle'!")
+print(f"It is your turn! What move would you like {your_random_pokemon.name.upper()} to make?")
+moveList = ""
+for move in your_random_pokemon.moves.keys():
+    moveList = moveList + f"{move}    "
+print(moveList)
+move = input("")
+while move not in your_random_pokemon.moves.keys():
+    move = input("Enter another move! ")
+damage = your_random_pokemon.pokemonAttack(move, ai_random_pokemon.defn, ai_random_pokemon.poketype[0], ai_random_pokemon.poketype[1] if len(ai_random_pokemon.poketype) > 1 else None)
+print(f"{your_random_pokemon.name.upper()} did {damage} damage to {ai_random_pokemon.name.upper()} with '{move}'!")
