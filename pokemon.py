@@ -34,6 +34,29 @@ class Pokemon:
             count = count + 1
         return moveSet
     
-    def pokemonAttack(self, opp_pokemon):
-        return ""
+    def pokemonAttack(self, move, opp_defense, opp_type1, opp_type2):
+        level = 50
+        critical = 2 if random.randint(1, 10) == 5 else 1
+        power = self.moves[move]["power"]
+        a_d = self.atk / opp_defense
+        stab = self.moves[move]["stab"]
+        if opp_type1 in self.moves[move]["not_very_effective"]:
+            type1 = 0.5
+        elif opp_type1 in self.moves[move]["super_effective"]:
+            type1 = 2
+        else:
+            type1 = 1
+        type2 = 1
+        if opp_type2 != None:
+            if opp_type2 in self.moves[move]["not_very_effective"]:
+                type2 = 0.5
+            elif opp_type2 in self.moves[move]["super_effective"]:
+                type2 = 2
+            else:
+                type2 = 1
+        
+        rando = float(random.randint(217, 255) / 255)
+        
+        damage = round((((2 * level * critical / + 2) * power * a_d) / 50 + 2) * stab * type1 * type2 * rando)
+        return damage
     

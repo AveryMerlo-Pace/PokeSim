@@ -885,9 +885,6 @@ pokemon_list = [
 os.system('clear')
 
 # CREATE AND DESCRIBE USER PORKEMON
-for pokemon in pokemon_list:
-    print(pokemon.name)
-    time.sleep(0.5)
 your_random_pokemon = pokemon_list[random.randint(0, len(pokemon_list)-1)]
 print(f"Your {your_random_pokemon.describePokemon()[0]}")
 #time.sleep(1)
@@ -934,7 +931,7 @@ time.sleep(5)
 os.system('clear')
 
 # WHO ATTACKS FIRST
-print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
+#print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.upper()} (USER) first ({ai_random_pokemon.spd} speed > {your_random_pokemon.spd} speed)\n" if ai_random_pokemon.spd > your_random_pokemon.spd else f"{your_random_pokemon.name.upper()} (USER) ATTACKS {ai_random_pokemon.name.upper()} (AI) FIRST ({your_random_pokemon.spd} SPD > {ai_random_pokemon.spd} SPD)\n")
 
 # ATTACK UNTIL ONE HP IS <=0
 # while ai_random_pokemon.hp > 0 and your_random_pokemon.hp > 0:
@@ -942,3 +939,7 @@ print(f"{ai_random_pokemon.name.upper()} (AI) attacks {your_random_pokemon.name.
 #     print(f"USER HP: {your_random_pokemon.hp}!")
 #     ai_random_pokemon.hp -= 1
 #     your_random_pokemon.hp -= 1
+
+# WORKING DAMAGE LINE USING BULBASAUR'S TACKLE ON CHARMANDER
+damage = pokemon_list[0].pokemonAttack("Tackle", pokemon_list[3].defn, pokemon_list[3].poketype[0], pokemon_list[3].poketype[1] if len(pokemon_list[3].poketype) > 1 else None)
+print(f"{pokemon_list[0].name.upper()} did {damage} damage to {pokemon_list[3].name.upper()} with 'Tackle'!")
