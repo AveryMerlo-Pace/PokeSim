@@ -39,15 +39,18 @@ class Pokemon:
         critical = 2 if random.randint(1, 10) == 5 else 1
         if critical == 2:
             print("CRITICAL HIT!")
+            time.sleep(0.5)
         power = self.moves[move]["power"]
         a_d = self.atk / opp_defense
         stab = self.moves[move]["stab"]
         if opp_type1 in self.moves[move]["not_very_effective"]:
             type1 = 0.5
             print(f"{move} is not very effective against {opp_type1}...")
+            time.sleep(0.5)
         elif opp_type1 in self.moves[move]["super_effective"]:
             type1 = 2
             print(f"{move} is SUPER EFFECTIVE against {opp_type1}!")
+            time.sleep(0.5)
         else:
             type1 = 1
         type2 = 1
@@ -55,15 +58,24 @@ class Pokemon:
             if opp_type2 in self.moves[move]["not_very_effective"]:
                 type2 = 0.5
                 print(f"{move} is not very effective against {opp_type2}...")
+                time.sleep(0.5)
             elif opp_type2 in self.moves[move]["super_effective"]:
                 type2 = 2
                 print(f"{move} is SUPER EFFECTIVE against {opp_type2}!")
+                time.sleep(0.5)
             else:
                 type2 = 1
         
         rando = float(random.randint(217, 255) / 255)
         
         damage = round((((2 * level * critical / + 2) * power * a_d) / 50 + 2) * stab * type1 * type2 * rando)
+        
+        # ACCURACY
+        # if self.moves[move]["accuracy"] != 100:
+        #     hit = random.randint(1, 100)
+        #     if hit > self.moves[move]["accuracy"]:
+        #         damage = 0
+        
         return int(damage/2)
     
     def takeDamage(self, hp, damage):
